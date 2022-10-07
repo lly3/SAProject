@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->id();
-            $table->string('url');
-            $table->foreignIdFor(App\Models\Product::class);
+        Schema::create('materials', function (Blueprint $table) {
+            $table->id('m_id');
+            $table->string('m_description');
+            $table->smallInteger('m_stock');
+            $table->double('m_size');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('materials');
     }
 };

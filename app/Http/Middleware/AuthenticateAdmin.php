@@ -17,7 +17,7 @@ class AuthenticateAdmin
     public function handle(Request $request, Closure $next)
     {
         if(! $request->user()->isAdmin()) {
-            return redirect()->route('posts.index');
+            return redirect()->to('/');
         }
         return $next($request);
     }

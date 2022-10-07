@@ -17,10 +17,9 @@
 <body>
     @include('layouts._navbar')
 
-    <div class='mx-auto max-w-6xl w-11/12'>
+    <div class='w-10/12 mx-auto'>
         @yield('content')
     </div>
 
-    @include('layouts._footer')
 </body>
 </html>

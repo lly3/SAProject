@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('posts.index');
+    return redirect()->route('products.index');
 });
 
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->middleware(['authAdmin'])->name('dashboard');
@@ -41,6 +41,19 @@ Route::post('/posts/{post}/comments/store', [\App\Http\Controllers\PostControlle
     ->name('posts.comments.store');
 
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
+
+Route::resource('/products', \App\Http\Controllers\ProductController::class);
+
+Route::resource('/orders', \App\Http\Controllers\OrderController::class);
+
+Route::post('/orders/{product}', [\App\Http\Controllers\OrderController::class, 'makeOrder'])
+    ->name('orders.make');
+
+Route::get('/orders/cancel/{order}', [\App\Http\Controllers\OrderController::class, 'cancelOrder'])->middleware(['auth'])
+    ->name('orders.cancel');
+
+Route::get('/orders/finish/{order}', [\App\Http\Controllers\OrderController::class, 'finishOrder'])->middleware(['authAdmin'])
+    ->name('orders.finish');
 
 Route::resource('/tags', \App\Http\Controllers\TagController::class);
 

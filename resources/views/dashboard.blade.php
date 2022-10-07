@@ -37,30 +37,6 @@
         }
     </style>
 
-    <h2 class="font-semibold text-xl text-gray-800 leading-tight my-3">
-        Dashboard
-    </h2>
-    <form action="{{ route('dashboard.filter') }}" class="mt-3 mb-1" method="GET">
-        @csrf
-        @method('GET')
-        <div class="flex space-x-4 items-center">
-            <div class="relative z-0 md:w-1/3 w-full mb-5">
-                <select
-                    name="select"
-                    value=""
-                    onclick="this.setAttribute('value', this.value);"
-                    class="pt-3 pb-2 block w-full px-0 mt-0 bg-transparent border-0 border-b-2 appearance-none z-1 focus:outline-none focus:ring-0 focus:border-black border-gray-200"
-                >
-                    <option value="" selected disabled hidden></option>
-                    @foreach(\App\Models\Organization::get() as $organization)
-                        <option value="{{ $organization->id }}">{{ $organization->name }}</option>
-                    @endforeach
-                </select>
-                <label for="select" class="absolute duration-300 top-3 -z-1 origin-0 text-gray-500">เลือกหน่วยงานที่ต้องการกรอง</label>
-            </div>
-            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded md:inline block mb-5 min-w-[115px]">กรองข้อมูล</button>
-        </div>
-    </form>
     {{--
     <div class="container">
         <h3 class="text-center">Laravel 5 - Column sorting with pagination example from scratch</h3>
@@ -89,6 +65,7 @@
     </div>
     --}}
 
+    <h1 class="text-2xl font-bold flex justify-start my-3">รายการสั่งซื้อทั้งหมด</h1>
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -101,64 +78,70 @@
                 </th>
                 <th scope="col" class="py-3 px-6">
                     <div class="flex items-center">
-                        @sortablelink('title')
+                        @sortablelink('email')
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg>
                     </div>
                 </th>
                 <th scope="col" class="py-3 px-6">
                     <div class="flex items-center">
-                        @sortablelink('description')
+                        @sortablelink('p_title')
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg>
                     </div>
                 </th>
                 <th scope="col" class="py-3 px-6">
                     <div class="flex items-center">
-                        @sortablelink('organization_id')
+                        @sortablelink('o_status')
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg>
                     </div>
                 </th>
                 <th scope="col" class="py-3 px-6">
                     <div class="flex items-center">
-                        @sortablelink('status')
+                        @sortablelink('amount')
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg>
                     </div>
                 </th>
                 <th scope="col" class="py-3 px-7">
                     <div class="flex items-center">
-                        @sortablelink('created_at')
+                        @sortablelink('o_placing_date')
                         <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg>
                     </div>
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    <span class="sr-only">Edit</span>
+                    <span class="sr-only">Details</span>
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    <span class="sr-only">Delete</span>
+                    <span class="sr-only">Confirm</span>
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    <span class="sr-only">Cancel</span>
                 </th>
             </tr>
             </thead>
             <tbody>
-                @if($posts->count())
-                    @foreach($posts as $key => $post)
+                @if($orders->count())
+                    @foreach($orders as $key => $order)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="py-4 px-6 ">{{ $post->id }}</td>
-                            <td class="py-4 px-6 ">{{ $post->title }}</td>
-                            <td class="py-4 px-6 ">{{ $post->description }}</td>
-                            <td class="py-4 px-6 ">{{ \App\Models\Organization::where('id', $post->organization_id)->first()->name }}</td>
-                            <td class="py-4 px-6 ">{{ $post->status }}</td>
-                            <td class="py-4 px-6 ">{{ $post->created_at->format('d-m-Y') }}</td>
+                            <td class="py-4 px-6 ">{{ $order->id }}</td>
+                            <td class="py-4 px-6 ">{{ $order->user->email }}</td>
+                            <td class="py-4 px-6 ">{{ $order->products->reduce(function($key,$product){ return $product->p_title; }) }}</td>
+                            <td class="py-4 px-6 ">{{ $order->o_status }}</td>
+                            <td class="py-4 px-6 ">{{ $order->products->reduce(function($key, $product){ return $product->pivot->op_amount; }) }}</td>
+                            <td class="py-4 px-6 ">{{ date('d-m-Y', strtotime($order->o_placing_date)) }}</td>
                             <td class="py-4 px-6 text-right">
-                                <a href="{{ route('posts.admin.edit', ['post' => $post->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <a href="{{ route('orders.show', ['order' => $order->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">รายละเอียด</a>
                             </td>
                             <td class="py-4 px-6 text-right">
-                                <a href="{{ route('posts.admin.delete', ['post' => $post->id]) }}" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                <a onclick="return confirm('Are you sure?')" href="{{ route('orders.finish', ['order' => $order->id]) }}" class="@if($order->o_status == 3 || $order->o_status == 2) pointer-events-none text-blue-300 @endif font-medium text-blue-600 dark:text-blue-500 hover:underline">เสร็จสิ้น</a>
+                            </td>
+                            <td class="py-4 px-6 text-right">
+                                <a onclick="return confirm('Are you sure?')" href="{{ route('orders.cancel', ['order' => $order->id]) }}" class="@if($order->o_status == 3 || $order->o_status == 2) pointer-events-none text-red-300 @endif font-medium text-red-600 dark:text-red-500 hover:underline">ยกเลิก</a>
                             </td>
                         </tr>
                     @endforeach
                 @endif
             </tbody>
         </table>
-        {!! $posts->appends(\Request::except('page'))->render() !!}
+        {!! $orders->appends(\Request::except('page'))->render() !!}
     </div>
 
 @endsection
