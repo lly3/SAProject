@@ -19,4 +19,8 @@ class Order extends Model
     public function products() {
         return $this->belongsToMany(Product::class)->withPivot('op_quantity', 'op_amount');
     }
+
+    public function invoice() {
+        return $this->hasOne(Invoice::class);
+    }
 }

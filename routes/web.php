@@ -55,6 +55,9 @@ Route::get('/orders/cancel/{order}', [\App\Http\Controllers\OrderController::cla
 Route::get('/orders/finish/{order}', [\App\Http\Controllers\OrderController::class, 'finishOrder'])->middleware(['authAdmin'])
     ->name('orders.finish');
 
+Route::get('/invoices/{order}', [\App\Http\Controllers\InvoiceController::class, 'issueInvoice'])->middleware(['authAdmin'])
+    ->name('invoices.issueInvoice');
+
 Route::resource('/tags', \App\Http\Controllers\TagController::class);
 
 Route::get('/my_posts', [\App\Http\Controllers\PostController::class, 'my_posts'])->middleware('auth')->name('my_posts');

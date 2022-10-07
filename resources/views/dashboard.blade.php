@@ -123,12 +123,16 @@
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="py-4 px-6 ">{{ $order->id }}</td>
                             <td class="py-4 px-6 ">{{ $order->user->email }}</td>
-                            <td class="py-4 px-6 ">{{ $order->products->reduce(function($key,$product){ return $product->p_title; }) }}</td>
+                            <td class="py-4 px-6 ">
+                                <a href="{{ route('orders.show', ['order' => $order->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                    {{ $order->products->reduce(function($key,$product){ return $product->p_title; }) }}
+                                </a>
+                            </td>
                             <td class="py-4 px-6 ">{{ $order->o_status }}</td>
                             <td class="py-4 px-6 ">{{ $order->products->reduce(function($key, $product){ return $product->pivot->op_amount; }) }}</td>
                             <td class="py-4 px-6 ">{{ date('d-m-Y', strtotime($order->o_placing_date)) }}</td>
                             <td class="py-4 px-6 text-right">
-                                <a href="{{ route('orders.show', ['order' => $order->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">รายละเอียด</a>
+                                <a onclick="return confirm('Are you sure?')" href="{{ route('invoices.issueInvoice', ['order' => $order->id]) }}" class="@if(\App\Models\Invoice::where('order_id', $order->id)->count() || $order->o_status != 2) pointer-events-none text-blue-300 @endif font-medium text-blue-600 dark:text-blue-500 hover:underline">พิมพ์ใบเสร็จ</a>
                             </td>
                             <td class="py-4 px-6 text-right">
                                 <a onclick="return confirm('Are you sure?')" href="{{ route('orders.finish', ['order' => $order->id]) }}" class="@if($order->o_status == 3 || $order->o_status == 2) pointer-events-none text-blue-300 @endif font-medium text-blue-600 dark:text-blue-500 hover:underline">เสร็จสิ้น</a>

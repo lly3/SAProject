@@ -14,12 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->id('invoice_id');
+            $table->id();
             $table->foreignIdFor(\App\Models\Order::class);
-            $table->foreignIdFor(\App\Models\Employee::class);
-            $table->smallInteger('i_status');
-            $table->smallInteger('i_amount');
-            $table->smallInteger('i_quantity');
+            $table->foreignIdFor(\App\Models\User::class);
             $table->string('i_payment_method');
             $table->dateTime('i_paying_date');
             $table->dateTime('i_placing_date');
