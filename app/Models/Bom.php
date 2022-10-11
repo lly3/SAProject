@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Bom extends Model
 {
     use HasFactory;
+
+    public function materials() {
+        return $this->belongsToMany(Material::class)->withTimestamps();
+    }
 }

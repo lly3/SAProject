@@ -112,7 +112,7 @@ class OrderController extends Controller
     }
 
     public function cancelOrder(Request $request, Order $order) {
-        if($request->user()->id == $order->user_id || $request->user()->isAdmin() && ($order->o_status == 0 || $order->o_status == 1)) {
+        if(($request->user()->id == $order->user_id || $request->user()->isAdmin()) && ($order->o_status == 0 || $order->o_status == 1)) {
             $order->o_status = 3;
 
             foreach ($order->products as $key => $product) {

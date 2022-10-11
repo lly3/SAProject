@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Order::class);
             $table->foreignIdFor(\App\Models\Product::class);
             $table->smallInteger('op_quantity');
-            $table->smallInteger('op_amount');
+            $table->Integer('op_amount');
             $table->timestamps();
         });
     }

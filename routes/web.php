@@ -58,6 +58,12 @@ Route::get('/orders/finish/{order}', [\App\Http\Controllers\OrderController::cla
 Route::get('/invoices/{order}', [\App\Http\Controllers\InvoiceController::class, 'issueInvoice'])->middleware(['authAdmin'])
     ->name('invoices.issueInvoice');
 
+Route::get('/boms/create', [\App\Http\Controllers\BomController::class, 'create'])->middleware(['authAdmin'])
+    ->name('boms.create');
+
+Route::post('/boms', [\App\Http\Controllers\BomController::class, 'store'])->middleware(['authAdmin'])
+    ->name('boms.store');
+
 Route::resource('/tags', \App\Http\Controllers\TagController::class);
 
 Route::get('/my_posts', [\App\Http\Controllers\PostController::class, 'my_posts'])->middleware('auth')->name('my_posts');

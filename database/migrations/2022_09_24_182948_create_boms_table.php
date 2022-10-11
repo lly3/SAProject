@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('boms', function (Blueprint $table) {
-            $table->id('bom_id');
+            $table->id();
             $table->foreignIdFor(\App\Models\Product::class);
-            $table->foreignIdFor(\App\Models\Employee::class);
+            $table->foreignIdFor(\App\Models\User::class);
             $table->string('bom_description');
             $table->smallInteger('bom_status');
             $table->timestamps();

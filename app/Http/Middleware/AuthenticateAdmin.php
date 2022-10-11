@@ -16,7 +16,7 @@ class AuthenticateAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(! $request->user()->isAdmin()) {
+        if( $request->user() == null || ! $request->user()->isAdmin()) {
             return redirect()->to('/');
         }
         return $next($request);

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('materials', function (Blueprint $table) {
-            $table->id('m_id');
+            $table->id();
             $table->string('m_description');
             $table->smallInteger('m_stock');
-            $table->double('m_size');
+            $table->string('m_size')->nullable();
             $table->timestamps();
         });
     }
