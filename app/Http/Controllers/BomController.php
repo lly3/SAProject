@@ -34,13 +34,10 @@ class BomController extends Controller
         foreach (Material::all() as $material) {
             $quantity = $request->input($material->id.'_quantity');
             if($quantity != 0) {
-                $material->m_stock -= $quantity;
-                $material->save();
-
                 $bom->materials()->save($material, ['bm_quantity' => $quantity]);
             }
         }
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'สร้าง build of materials สำเร็จ');
     }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('manufactures', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Product::class);
-            $table->foreignIdFor(\App\Models\Employee::class);
+            $table->foreignIdFor(\App\Models\User::class);
             $table->dateTime('m_date');
             $table->timestamps();
         });

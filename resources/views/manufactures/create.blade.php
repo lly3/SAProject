@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1 class="text-2xl font-bold flex justify-start my-3">สร้าง build of materials</h1>
+    <h1 class="text-2xl font-bold flex justify-start my-3">Manufacture (ผลิตสินค้า)</h1>
     @if (\Session::has('success'))
         <div class="flex justify-start">
             <ul>
@@ -9,7 +9,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('boms.store') }}" method="POST">
+    <form action="{{ route('manufactures.store') }}" method="POST">
         @csrf
         @method('POST')
         <div class="flex flex-col space-y-2 lg:w-1/2 md:w-3/4 w-full">
@@ -20,14 +20,6 @@
                     <option value="{{ $product->id }}">{{ $product->id.'_'.$product->p_title }}</option>
                 @endforeach
             </select>
-            <label for="selected_product" class="font-bold text-lg">รายละเอียดเพิ่มเติม</label>
-            <textarea name="description" class="rounded-lg" cols="30" rows="2" required></textarea>
-            <div class="flex items-center space-x-2">
-                <input type="radio" id="active" name="status" value="1" required>
-                <label for="active">พร้อมใช้งาน</label>
-                <input type="radio" id="inactive" name="status" value="0" required>
-                <label for="inactive">ไม่พร้อมใช้งาน</label>
-            </div>
         </div>
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg my-4">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
