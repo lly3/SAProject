@@ -134,4 +134,10 @@ class OrderController extends Controller
 
         return redirect()->back();
     }
+
+    public function me(Request $request) {
+        $orders = Order::where('user_id', $request->user()->id)->paginate(10);
+
+        return view('orders.me', ['orders' => $orders]);
+    }
 }

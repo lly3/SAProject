@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1 class="text-2xl font-bold flex justify-start my-3">รายการสั่งซื้อทั้งหมด</h1>
+    <h1 class="text-2xl font-bold flex justify-start my-3">รายการสั่งซื้อของฉัน</h1>
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -43,42 +43,30 @@
                     </div>
                 </th>
                 <th scope="col" class="py-3 px-6">
-                    <span class="sr-only">Issue Invoice</span>
-                </th>
-                <th scope="col" class="py-3 px-6">
-                    <span class="sr-only">Confirm</span>
-                </th>
-                <th scope="col" class="py-3 px-6">
                     <span class="sr-only">Cancel</span>
                 </th>
             </tr>
             </thead>
             <tbody>
-                @if($orders->count())
-                    @foreach($orders as $key => $order)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="py-4 px-6 ">{{ $order->id }}</td>
-                            <td class="py-4 px-6 ">{{ $order->user->email }}</td>
-                            <td class="py-4 px-6 ">
-                                <a href="{{ route('orders.show', ['order' => $order->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    {{ $order->products->reduce(function($key,$product){ return $product->p_title; }) }}
-                                </a>
-                            </td>
-                            <td class="py-4 px-6 ">{{ $order->o_status }}</td>
-                            <td class="py-4 px-6 ">{{ $order->products->reduce(function($key, $product){ return $product->pivot->op_amount; }) }}</td>
-                            <td class="py-4 px-6 ">{{ date('d-m-Y', strtotime($order->o_placing_date)) }}</td>
-                            <td class="py-4 px-6 text-right">
-                                <a onclick="return confirm('Are you sure?')" href="{{ route('invoices.issueInvoice', ['order' => $order->id]) }}" class="@if(\App\Models\Invoice::where('order_id', $order->id)->count() || $order->o_status != 2) pointer-events-none text-blue-300 @endif font-medium text-blue-600 dark:text-blue-500 hover:underline">พิมพ์ใบเสร็จ</a>
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <a onclick="return confirm('Are you sure?')" href="{{ route('orders.finish', ['order' => $order->id]) }}" class="@if($order->o_status == 3 || $order->o_status == 2) pointer-events-none text-blue-300 @endif font-medium text-blue-600 dark:text-blue-500 hover:underline">เสร็จสิ้น</a>
-                            </td>
-                            <td class="py-4 px-6 text-right">
-                                <a onclick="return confirm('Are you sure?')" href="{{ route('orders.cancel', ['order' => $order->id]) }}" class="@if($order->o_status == 3 || $order->o_status == 2) pointer-events-none text-red-300 @endif font-medium text-red-600 dark:text-red-500 hover:underline">ยกเลิก</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
+            @if($orders->count())
+                @foreach($orders as $key => $order)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="py-4 px-6 ">{{ $order->id }}</td>
+                        <td class="py-4 px-6 ">{{ $order->user->email }}</td>
+                        <td class="py-4 px-6 ">
+                            <a href="{{ route('orders.show', ['order' => $order->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                {{ $order->products->reduce(function($key,$product){ return $product->p_title; }) }}
+                            </a>
+                        </td>
+                        <td class="py-4 px-6 ">{{ $order->o_status }}</td>
+                        <td class="py-4 px-6 ">{{ $order->products->reduce(function($key, $product){ return $product->pivot->op_amount; }) }}</td>
+                        <td class="py-4 px-6 ">{{ date('d-m-Y', strtotime($order->o_placing_date)) }}</td>
+                        <td class="py-4 px-6 text-right">
+                            <a onclick="return confirm('Are you sure?')" href="{{ route('orders.cancel', ['order' => $order->id]) }}" class="@if($order->o_status == 3 || $order->o_status == 2) pointer-events-none text-red-300 @endif font-medium text-red-600 dark:text-red-500 hover:underline">ยกเลิก</a>
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
             </tbody>
         </table>
         {!! $orders->appends(\Request::except('page'))->render() !!}

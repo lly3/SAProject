@@ -26,12 +26,36 @@
                 @auth
                     @if(Auth::user()->isAdmin())
                         <li>
+                            <a href="{{ route('manufactures.create') }}"
+                               class="transition duration-300 ease-in-out block py-2 pr-4 pl-3 rounded lg:p-0 @if(Route::currentRouteName() === 'manufactures.create') current-page @else hover:text-blue-500 @endif" >
+                                Manufacture
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('materials.index') }}"
+                               class="transition duration-300 ease-in-out block py-2 pr-4 pl-3 rounded lg:p-0 @if(Route::currentRouteName() === 'materials.index') current-page @else hover:text-blue-500 @endif" >
+                                Materials
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('boms.create') }}"
+                               class="transition duration-300 ease-in-out block py-2 pr-4 pl-3 rounded lg:p-0 @if(Route::currentRouteName() === 'boms.create') current-page @else hover:text-blue-500 @endif" >
+                                Create BOM
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('dashboard') }}"
                                class="transition duration-300 ease-in-out block py-2 pr-4 pl-3 rounded lg:p-0 @if(Route::currentRouteName() === 'dashboard') current-page @else hover:text-blue-500 @endif" >
                                 Dashboard
                             </a>
                         </li>
                     @endif
+                    <li>
+                        <a href="{{ route('orders.me') }}"
+                           class="transition duration-300 ease-in-out block py-2 pr-4 pl-3 rounded lg:p-0 @if(Route::currentRouteName() === 'orders.me') current-page @else hover:text-blue-500 @endif" >
+                            คำสั่งซื้อของฉัน
+                        </a>
+                    </li>
                     <li>
                         <a href="{{ route('products.index') }}"
                            class="transition duration-300 ease-in-out block py-2 pr-4 pl-3 rounded lg:p-0 @if(Route::currentRouteName() === 'products.index') current-page @else hover:text-blue-500 @endif" >

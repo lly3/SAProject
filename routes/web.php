@@ -44,7 +44,11 @@ Route::resource('/posts', \App\Http\Controllers\PostController::class);
 
 Route::resource('/products', \App\Http\Controllers\ProductController::class);
 
-Route::resource('/orders', \App\Http\Controllers\OrderController::class);
+Route::get('/orders/me', [\App\Http\Controllers\OrderController::class, 'me'])->middleware(['auth'])
+    ->name('orders.me');
+
+Route::get('/orders/show/{order}', [\App\Http\Controllers\OrderController::class, 'show'])->middleware(['auth'])
+    ->name('orders.show');
 
 Route::post('/orders/{product}', [\App\Http\Controllers\OrderController::class, 'makeOrder'])
     ->name('orders.make');
