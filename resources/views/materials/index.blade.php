@@ -2,6 +2,16 @@
 
 @section('content')
     <h1 class="text-2xl font-bold flex justify-start my-3">Materials ทั้งหมด</h1>
+    @if (\Session::has('success'))
+        <div class="flex justify-start">
+            <ul>
+                <li class="font-bold text-green-700 text-3xl">{!! \Session::get('success') !!}</li>
+            </ul>
+        </div>
+    @endif
+    <form action="{{ route('materials.store') }}" method="POST">
+        @csrf
+        @method('POST')
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg my-4">
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -30,6 +40,11 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg>
                         </div>
                     </th>
+                    <th scope="col" class="py-3 px-6">
+                        <div class="flex items-center">Quantity
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"></path></svg>
+                        </div>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -42,13 +57,24 @@
                             <td class="py-4 px-6 ">
                                 {{ $material->m_stock }}
                             </td>
+                            <td class="py-4 px-6">
+                                <input class="max-w-[100px] border-gray-500 rounded-lg"
+                                       name="{{ $material->id . "_quantity" }}" type="number" inputmode="numeric" value=0 min=0 required />
+                                ชิ้น
+                            </td>
                         </tr>
                     @endforeach
                 @endif
                 </tbody>
             </table>
         </div>
-
+        <div class="flex my-3 justify-end">
+            <button
+                type="submit"
+                class="bg-blue-600 inline-block px-12 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+            >ยืนยัน</button>
+        </div>
+    </form>
 
 @endsection
 
