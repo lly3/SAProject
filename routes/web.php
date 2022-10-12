@@ -71,6 +71,9 @@ Route::post('/boms', [\App\Http\Controllers\BomController::class, 'store'])->mid
 Route::get('/materials', [\App\Http\Controllers\MaterialController::class, 'index'])->middleware(['authAdmin'])
     ->name('materials.index');
 
+Route::post('/materials', [\App\Http\Controllers\MaterialController::class, 'store'])->middleware(['authAdmin'])
+    ->name('materials.store');
+
 Route::get('/manufacture', [\App\Http\Controllers\ManufactureController::class, 'create'])->middleware(['authAdmin'])
     ->name('manufactures.create');
 
