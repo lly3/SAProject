@@ -76,7 +76,7 @@
                             </td>
                             <td class="py-4 px-6">
                                 <input class="max-w-[100px] border-gray-500 rounded-lg"
-                                       name="{{ $material->id . "_quantity" }}" type="number" inputmode="numeric" value=0 min=0 max="{{ $material->m_stock }}" required />
+                                       name="{{ $material->id . "_quantity" }}" type="number" inputmode="numeric" value=0 min=0 required />
                                 ชิ้น
                             </td>
                         </tr>
