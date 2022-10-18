@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="{{ asset('images/logo_no_text.png') }}">
     <title>
-        HeartbeatPetition ระบบร้องเรียนออนไลน์มหาวิทยาลัยเกษตรศาสตร์
+        SangArun เว็ปค้าไม้ที่ดีที่สุดในโลก
     </title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
